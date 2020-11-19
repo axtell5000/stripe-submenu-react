@@ -7,6 +7,15 @@ import logo from './images/logo.svg';
 const Navbar = () => {
   // fetching functions from context
   const { openSidebar, openSubmenu, closeSubmenu } = useGlobalContext();
+
+  const displaySubmenu = (e) => {
+    const page = e.target.textContent;
+    // getting the dimensions of the button you hovered over, has a left and right property
+    const tempBtn = e.target.getBoundingClientRect();
+    const center = (tempBtn.left + tempBtn.right) / 2;
+    const bottom = tempBtn.bottom - 3;
+    openSubmenu(page, {center, bottom});
+  };
   
   return (
     <nav className='nav'>
@@ -19,17 +28,17 @@ const Navbar = () => {
         </div>
         <ul className='nav-links'>
           <li>
-            <button className='link-btn' title="Products">
+            <button className='link-btn' title="Products" onMouseOver={displaySubmenu}>
               products
             </button>
           </li>
           <li>
-            <button className='link-btn' title="Developers">
+            <button className='link-btn' title="Developers" onMouseOver={displaySubmenu}>
               developers
             </button>
           </li>
           <li>
-            <button className='link-btn' title="Company">
+            <button className='link-btn' title="Company" onMouseOver={displaySubmenu}>
               company
             </button>
           </li>
